@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:component-scan base-package="com.Univerclassroom" />
+	<mvc:annotation-driven />
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/Univerclassroom" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+			
+				<value>com.Univerclassroom.model.Admin</value>		
+				<value>com.Univerclassroom.model.SchoolAdmin</value>
+				<value>com.Univerclassroom.model.Student</value>
+				<value>com.Univerclassroom.model.Parent</value>
+				<value>com.Univerclassroom.model.StudentToParent</value>
+				<value>com.Univerclassroom.model.AdmissionResult</value>	  		
+				<value>com.Univerclassroom.model.School</value>	   
+				<value>com.Univerclassroom.model.FeeStructure</value>	   
+				<value>com.Univerclassroom.model.Librarian</value>  
+				<value>com.Univerclassroom.model.Account</value>  
+				<value>com.Univerclassroom.model.Teacher</value>  
+				<value>com.Univerclassroom.model.Education</value>  
+				<value>com.Univerclassroom.model.Experience</value> 
+				<value>com.Univerclassroom.model.Book</value> 
+				<value>com.Univerclassroom.model.BookIssue</value>
+				<value>com.Univerclassroom.model.StudentClass</value>
+				<value>com.Univerclassroom.model.StudentDivision</value>
+				<value>com.Univerclassroom.model.Holiday</value>
+				<value>com.Univerclassroom.model.StudentDivisonToStudent</value>
+				
+				 
+		  </list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+			
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean id="AdminDao" class="com.Univerclassroom.dao.AdminDaoImpl"></bean>
+	<bean id="AdminServices" class="com.Univerclassroom.services.AdminServicesImpl"></bean>
+	
+	<bean id="SchoolAdminDao" class="com.Univerclassroom.dao.SchoolAdminDaoImpl"></bean>
+	<bean id="SchoolAdminServices" class="com.Univerclassroom.services.SchoolAdminServicesImpl"></bean>
+	
+	<bean id="StudentDao" class="com.Univerclassroom.dao.StudentDaoImpl"></bean>
+	<bean id="Studentervices" class="com.Univerclassroom.services.StudentServicesImpl"></bean>
+	
+	<bean id="ParentDao" class="com.Univerclassroom.dao.ParentDaoImpl"></bean>
+	<bean id="ParentServices" class="com.Univerclassroom.services.ParentServicesImpl"></bean>
+	
+	<bean id="SchoolDao" class="com.Univerclassroom.dao.SchoolDaoImpl"></bean>
+	<bean id="SchoolServices" class="com.Univerclassroom.services.SchoolServicesImpl"></bean>
+	
+	<bean id="FeeStructureDao" class="com.Univerclassroom.dao.FeeStructureDaoImpl"></bean>
+	<bean id="FeeStructureServices" class="com.Univerclassroom.services.FeeStructureServicesImpl"></bean>
+	
+	<bean id="LibrarianDao" class="com.Univerclassroom.dao.LibrarianDaoImpl"></bean>
+	<bean id="LibrarianServices" class="com.Univerclassroom.services.LibrarianServicesImpl"></bean>
+	
+	<bean id="AccountDao" class="com.Univerclassroom.dao.AccountDaoImpl"></bean>
+	<bean id="AccountServices" class="com.Univerclassroom.services.AccountServicesImpl"></bean>
+		
+	<bean id="TeacherDao" class="com.Univerclassroom.dao.TeacherDaoImpl"></bean>
+	<bean id="TeacherServices" class="com.Univerclassroom.services.TeacherServicesImpl"></bean>
+	
+	<bean id="StudentClassDao" class="com.Univerclassroom.dao.StudentClassDaoImpl"></bean>
+	<bean id="StudentClassServices" class="com.Univerclassroom.services.StudentClassServicesImpl"></bean>
+	
+	<bean id="StudentDivisionDao" class="com.Univerclassroom.dao.StudentDivisionDaoImpl"></bean>
+	<bean id="StudentDivisionServices" class="com.Univerclassroom.services.StudentDivisionServicesImpl"></bean>
+	
+	<bean id="StudentDivisonToStudentDao" class="com.Univerclassroom.dao.StudentDivisonToStudentDaoImpl"></bean>
+	<bean id="StudentDivisonToStudentServices" class="com.Univerclassroom.services.StudentDivisonToStudentServicesImpl"></bean>
+</beans>
+
